@@ -8,6 +8,8 @@ package br.com.localeader.api.services;
 import br.com.localeader.api.model.CadEndereco;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 /**
  *
@@ -22,4 +24,8 @@ public interface CadEnderecoService {
      List<CadEndereco> listarPorDocumentoFk(Integer documentoFk);
      
      List<CadEndereco> listarPorUsuarioFk(Integer usuarioFk);
+     
+     Page<CadEndereco> listarPorUsuarioFk(Integer usuarioFk, PageRequest pageRequest);
+     
+     Page<CadEndereco> listarPorDocumentoFk(Integer documentoFk, PageRequest pageRequest);
 }

@@ -5,17 +5,15 @@
  */
 package br.com.localeader.api.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  *
  * @author Leandro Laurindo
  */
-@RestController("/")
-public class MainController {
-    
-    public String index() {
-        return "index";
-    }
+@RestController("/CadastrarPessoaPJ")
+@CrossOrigin(origins = "*")
+public class CadastroPessoaPJController {
     
 }

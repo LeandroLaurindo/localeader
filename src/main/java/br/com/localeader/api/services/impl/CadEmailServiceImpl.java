@@ -11,6 +11,8 @@ import br.com.localeader.api.services.CadEmailService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,6 +43,11 @@ public class CadEmailServiceImpl implements CadEmailService {
     @Override
     public List<CadEmail> listarPorUsuarioFk(Integer ussuarioFk) {
         return this.repository.findByUsuarioFk(ussuarioFk);
+    }
+
+    @Override
+    public Page<CadEmail> listarPorUsuarioFk(Integer usuarioFk, PageRequest pageRequest) {
+        return this.repository.findByUsuarioFk(usuarioFk, pageRequest);
     }
 
 }

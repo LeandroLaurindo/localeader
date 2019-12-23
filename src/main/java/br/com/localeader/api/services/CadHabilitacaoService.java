@@ -8,6 +8,8 @@ package br.com.localeader.api.services;
 import br.com.localeader.api.model.CadHabilitacao;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 /**
  *
@@ -22,4 +24,6 @@ public interface CadHabilitacaoService {
     Optional<CadHabilitacao> buscarPorNumRegistro(String numRegistro);
     
     List<CadHabilitacao> listarPorDocumentoFk(Integer documentoFk);
+    
+    Page<CadHabilitacao> listarPorDocumentoFk(Integer documentoFk, PageRequest pageRequest);
 }

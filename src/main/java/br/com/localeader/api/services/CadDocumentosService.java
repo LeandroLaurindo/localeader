@@ -8,6 +8,8 @@ package br.com.localeader.api.services;
 import br.com.localeader.api.model.CadDocumentos;
 import java.util.List;
 import java.util.Optional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 /**
  *
@@ -24,4 +26,6 @@ public interface CadDocumentosService {
     Optional<CadDocumentos> buscarPoUsuarioFk(Integer id);
 
     List<CadDocumentos> listarPorPessoa(Integer id);
+    
+    Page<CadDocumentos> listarPorPessoa(Integer id, PageRequest pageRequest);
 }

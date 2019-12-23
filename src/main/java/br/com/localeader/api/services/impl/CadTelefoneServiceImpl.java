@@ -11,6 +11,8 @@ import br.com.localeader.api.services.CadTelefoneService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -45,6 +47,16 @@ public class CadTelefoneServiceImpl implements CadTelefoneService{
     @Override
     public List<CadTelefone> listarPorDocumentoFk(Integer IdDocumento) {
         return this.repository.findByDocumentoFk(IdDocumento);
+    }
+
+ @Override
+    public Page<CadTelefone> listarPorUsuarioFk(Integer IdUsuario, PageRequest request) {
+        return this.repository.findByUsuarioFk(IdUsuario, request);
+    }
+
+    @Override
+    public Page<CadTelefone> listarPorDocumentoFk(Integer IdDocumento, PageRequest request) {
+        return this.repository.findByDocumentoFk(IdDocumento, request);
     }    
     
 }

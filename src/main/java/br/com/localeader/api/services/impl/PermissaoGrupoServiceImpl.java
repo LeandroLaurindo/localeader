@@ -11,6 +11,8 @@ import br.com.localeader.api.services.PermissaoGrupoService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -40,6 +42,16 @@ public class PermissaoGrupoServiceImpl implements PermissaoGrupoService{
     @Override
     public List<PermissaoGrupo> listarPorFkGrupo(Integer fkGrupo) {
         return this.repository.findByFkGrupo(fkGrupo);
+    }
+
+    @Override
+    public Page<PermissaoGrupo> listarPorFkPermissao(Integer fkPermissao, PageRequest pageRequest) {
+       return this.repository.findByFkPermissao(fkPermissao, pageRequest);
+    }
+
+    @Override
+    public Page<PermissaoGrupo> listarPorFkGrupo(Integer fkGrupo, PageRequest pageRequest) {
+       return this.repository.findByFkGrupo(fkGrupo, pageRequest);
     }
     
 }

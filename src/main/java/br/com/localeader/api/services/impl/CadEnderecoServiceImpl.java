@@ -13,6 +13,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,22 +22,22 @@ import org.springframework.stereotype.Service;
  * @author Leandro Laurindo
  */
 @Service
-public class CadEnderecoServiceImpl implements CadEnderecoService{
-    
-    private static final Logger LOG =  LoggerFactory.getLogger(CadEnderecoServiceImpl.class);
-    
+public class CadEnderecoServiceImpl implements CadEnderecoService {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CadEnderecoServiceImpl.class);
+
     @Autowired
     private CadEnderecoRepository repository;
-    
+
     @Override
     public CadEndereco persistir(CadEndereco endereco) {
         LOG.info("Salvando endereco : {}" + endereco);
-       return this.repository.save(endereco);
+        return this.repository.save(endereco);
     }
 
     @Override
     public Optional<CadEndereco> buscarPorIdEndereco(Integer id) {
-     return  Optional.ofNullable(this.repository.findByIdEndereco(id));
+        return Optional.ofNullable(this.repository.findByIdEndereco(id));
     }
 
     @Override
@@ -47,5 +49,15 @@ public class CadEnderecoServiceImpl implements CadEnderecoService{
     public List<CadEndereco> listarPorDocumentoFk(Integer documentoFk) {
         return this.repository.findByDocumentoFk(documentoFk);
     }
-    
+
+    @Override
+    public Page<CadEndereco> listarPorUsuarioFk(Integer usuarioFk, PageRequest pageRequest) {
+        return this.repository.findByUsuarioFk(usuarioFk, pageRequest);
+    }
+
+    @Override
+    public Page<CadEndereco> listarPorDocumentoFk(Integer documentoFk, PageRequest pageRequest) {
+        return this.repository.findByDocumentoFk(documentoFk, pageRequest);
+    }
+
 }

@@ -11,6 +11,8 @@ import br.com.localeader.api.services.CadClienteService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -58,4 +60,8 @@ public class CadClienteServiceImpl implements CadClienteService{
      return this.repository.findByDocumentoFk(id);
     }
     
+    @Override
+    public Page<CadCliente> buscarPorDocumento(Integer id, PageRequest pageRequest){
+     return this.repository.findByDocumentoFk(id, pageRequest);
+    }
 }

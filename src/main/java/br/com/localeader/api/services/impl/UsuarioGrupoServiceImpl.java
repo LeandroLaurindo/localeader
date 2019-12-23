@@ -11,6 +11,8 @@ import br.com.localeader.api.services.UsuarioGrupoService;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 /**
@@ -41,6 +43,11 @@ public class UsuarioGrupoServiceImpl implements UsuarioGrupoService{
     @Override
     public List<UsuarioGrupo> buscarPorGrupoFk(Integer grupoFk) {
         return this.repository.findByGrupoFk(grupoFk);
+    }
+
+    @Override
+    public Page<UsuarioGrupo> buscarPorGrupoFk(Integer grupoFk, PageRequest pageRequest) {
+        return this.repository.findByGrupoFk(grupoFk, pageRequest);
     }
     
 }
