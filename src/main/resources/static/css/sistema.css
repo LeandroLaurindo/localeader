@@ -1,0 +1,15 @@
+/* 
+    Created on : 21/12/2019, 18:45:21
+    Author     : Leandro Laurindo
+*/
+.alinhar-centro{
+    display: inline-flex;
+    vertical-align:middle;
+    align-items: center;
+}
+.erro.msg{
+    color:  red;
+}
+.sucesso.msg{
+     color: blue;
+}
