@@ -49,5 +49,6 @@ public class UsuarioGrupoServiceImpl implements UsuarioGrupoService{
     public Page<UsuarioGrupo> buscarPorGrupoFk(Integer grupoFk, PageRequest pageRequest) {
         return this.repository.findByGrupoFk(grupoFk, pageRequest);
     }
+
     
 }

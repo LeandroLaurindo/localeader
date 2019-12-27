@@ -6,8 +6,8 @@
 package br.com.localeader.api.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,7 +36,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "cad_documentos", catalog = "localeader", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CadDocumentos.findAll", query = "SELECT c FROM CadDocumentos c")})
+    @NamedQuery(name = "CadDocumentos.findAll", query = "SELECT c FROM CadDocumentos c")
+    , @NamedQuery(name = "CadDocumentos.findByIdDocumentos", query = "SELECT c FROM CadDocumentos c WHERE c.idDocumentos = :idDocumentos")
+    , @NamedQuery(name = "CadDocumentos.findByCpf", query = "SELECT c FROM CadDocumentos c WHERE c.cpf = :cpf")
+    , @NamedQuery(name = "CadDocumentos.findByCnpj", query = "SELECT c FROM CadDocumentos c WHERE c.cnpj = :cnpj")
+    , @NamedQuery(name = "CadDocumentos.findByRg", query = "SELECT c FROM CadDocumentos c WHERE c.rg = :rg")
+    , @NamedQuery(name = "CadDocumentos.findByInscricaoEstudal", query = "SELECT c FROM CadDocumentos c WHERE c.inscricaoEstudal = :inscricaoEstudal")
+    , @NamedQuery(name = "CadDocumentos.findByInscricaoMunicipal", query = "SELECT c FROM CadDocumentos c WHERE c.inscricaoMunicipal = :inscricaoMunicipal")
+    , @NamedQuery(name = "CadDocumentos.findBySuframa", query = "SELECT c FROM CadDocumentos c WHERE c.suframa = :suframa")
+    , @NamedQuery(name = "CadDocumentos.findByPassaporte", query = "SELECT c FROM CadDocumentos c WHERE c.passaporte = :passaporte")
+    , @NamedQuery(name = "CadDocumentos.findByValidadePassaporte", query = "SELECT c FROM CadDocumentos c WHERE c.validadePassaporte = :validadePassaporte")
+    , @NamedQuery(name = "CadDocumentos.findByDataInsercao", query = "SELECT c FROM CadDocumentos c WHERE c.dataInsercao = :dataInsercao")
+    , @NamedQuery(name = "CadDocumentos.findByDataAlteracao", query = "SELECT c FROM CadDocumentos c WHERE c.dataAlteracao = :dataAlteracao")
+    , @NamedQuery(name = "CadDocumentos.findByUsuarioFk", query = "SELECT c FROM CadDocumentos c WHERE c.usuarioFk = :usuarioFk")})
 public class CadDocumentos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -83,19 +95,27 @@ public class CadDocumentos implements Serializable {
     @NotNull
     @Column(name = "usuario_fk")
     private int usuarioFk;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentoFk")
+    private List<CadFuncionarios> cadFuncionariosList;
     @JoinColumn(name = "pessoa_fk", referencedColumnName = "id_pessoa")
     @ManyToOne(optional = false)
     private CadPessoa pessoaFk;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentoFk")
-    private Collection<CadEmail> cadEmailCollection;
     @OneToMany(mappedBy = "documentoFk")
-    private Collection<CadHabilitacao> cadHabilitacaoCollection;
+    private List<CadHabilitacao> cadHabilitacaoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentoFk")
-    private Collection<CadCliente> cadClienteCollection;
+    private List<CadEmail> cadEmailList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentoFk")
-    private Collection<CadTelefone> cadTelefoneCollection;
+    private List<CadFornecedor> cadFornecedorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentoFk")
-    private Collection<CadEndereco> cadEnderecoCollection;
+    private List<CadVendedor> cadVendedorList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentoFk")
+    private List<CadCliente> cadClienteList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentoFk")
+    private List<CadTelefone> cadTelefoneList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentoFk")
+    private List<CadOcorrencias> cadOcorrenciasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "documentoFk")
+    private List<CadEndereco> cadEnderecoList;
 
     public CadDocumentos() {
     }
@@ -207,6 +227,15 @@ public class CadDocumentos implements Serializable {
         this.usuarioFk = usuarioFk;
     }
 
+    @XmlTransient
+    public List<CadFuncionarios> getCadFuncionariosList() {
+        return cadFuncionariosList;
+    }
+
+    public void setCadFuncionariosList(List<CadFuncionarios> cadFuncionariosList) {
+        this.cadFuncionariosList = cadFuncionariosList;
+    }
+
     public CadPessoa getPessoaFk() {
         return pessoaFk;
     }
@@ -216,48 +245,75 @@ public class CadDocumentos implements Serializable {
     }
 
     @XmlTransient
-    public Collection<CadEmail> getCadEmailCollection() {
-        return cadEmailCollection;
+    public List<CadHabilitacao> getCadHabilitacaoList() {
+        return cadHabilitacaoList;
     }
 
-    public void setCadEmailCollection(Collection<CadEmail> cadEmailCollection) {
-        this.cadEmailCollection = cadEmailCollection;
-    }
-
-    @XmlTransient
-    public Collection<CadHabilitacao> getCadHabilitacaoCollection() {
-        return cadHabilitacaoCollection;
-    }
-
-    public void setCadHabilitacaoCollection(Collection<CadHabilitacao> cadHabilitacaoCollection) {
-        this.cadHabilitacaoCollection = cadHabilitacaoCollection;
+    public void setCadHabilitacaoList(List<CadHabilitacao> cadHabilitacaoList) {
+        this.cadHabilitacaoList = cadHabilitacaoList;
     }
 
     @XmlTransient
-    public Collection<CadCliente> getCadClienteCollection() {
-        return cadClienteCollection;
+    public List<CadEmail> getCadEmailList() {
+        return cadEmailList;
     }
 
-    public void setCadClienteCollection(Collection<CadCliente> cadClienteCollection) {
-        this.cadClienteCollection = cadClienteCollection;
-    }
-
-    @XmlTransient
-    public Collection<CadTelefone> getCadTelefoneCollection() {
-        return cadTelefoneCollection;
-    }
-
-    public void setCadTelefoneCollection(Collection<CadTelefone> cadTelefoneCollection) {
-        this.cadTelefoneCollection = cadTelefoneCollection;
+    public void setCadEmailList(List<CadEmail> cadEmailList) {
+        this.cadEmailList = cadEmailList;
     }
 
     @XmlTransient
-    public Collection<CadEndereco> getCadEnderecoCollection() {
-        return cadEnderecoCollection;
+    public List<CadFornecedor> getCadFornecedorList() {
+        return cadFornecedorList;
     }
 
-    public void setCadEnderecoCollection(Collection<CadEndereco> cadEnderecoCollection) {
-        this.cadEnderecoCollection = cadEnderecoCollection;
+    public void setCadFornecedorList(List<CadFornecedor> cadFornecedorList) {
+        this.cadFornecedorList = cadFornecedorList;
+    }
+
+    @XmlTransient
+    public List<CadVendedor> getCadVendedorList() {
+        return cadVendedorList;
+    }
+
+    public void setCadVendedorList(List<CadVendedor> cadVendedorList) {
+        this.cadVendedorList = cadVendedorList;
+    }
+
+    @XmlTransient
+    public List<CadCliente> getCadClienteList() {
+        return cadClienteList;
+    }
+
+    public void setCadClienteList(List<CadCliente> cadClienteList) {
+        this.cadClienteList = cadClienteList;
+    }
+
+    @XmlTransient
+    public List<CadTelefone> getCadTelefoneList() {
+        return cadTelefoneList;
+    }
+
+    public void setCadTelefoneList(List<CadTelefone> cadTelefoneList) {
+        this.cadTelefoneList = cadTelefoneList;
+    }
+
+    @XmlTransient
+    public List<CadOcorrencias> getCadOcorrenciasList() {
+        return cadOcorrenciasList;
+    }
+
+    public void setCadOcorrenciasList(List<CadOcorrencias> cadOcorrenciasList) {
+        this.cadOcorrenciasList = cadOcorrenciasList;
+    }
+
+    @XmlTransient
+    public List<CadEndereco> getCadEnderecoList() {
+        return cadEnderecoList;
+    }
+
+    public void setCadEnderecoList(List<CadEndereco> cadEnderecoList) {
+        this.cadEnderecoList = cadEnderecoList;
     }
 
     @Override

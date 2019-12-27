@@ -5,20 +5,15 @@
  */
 package br.com.localeader.api.repositories;
 
-import br.com.localeader.api.model.CadGrupo;
-import java.util.List;
+import br.com.localeader.api.model.CadFuncionarios;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Leandro Laurindo
  */
-@Repository
-public interface CadGrupoRepository extends JpaRepository<CadGrupo, Integer> {
-
-    CadGrupo findByIdGrupo(Integer idGrupo);
+public interface CadFuncionariosRepository extends JpaRepository<CadFuncionarios, Integer> {
     
-    CadGrupo findByDsNome(String dsNome);
-
+    CadFuncionarios findByIdFuncionario(Integer idFuncionario);
+   
 }

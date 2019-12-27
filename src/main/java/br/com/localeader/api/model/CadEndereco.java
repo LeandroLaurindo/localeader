@@ -32,7 +32,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "cad_endereco", catalog = "localeader", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CadEndereco.findAll", query = "SELECT c FROM CadEndereco c")})
+    @NamedQuery(name = "CadEndereco.findAll", query = "SELECT c FROM CadEndereco c")
+    , @NamedQuery(name = "CadEndereco.findByIdEndereco", query = "SELECT c FROM CadEndereco c WHERE c.idEndereco = :idEndereco")
+    , @NamedQuery(name = "CadEndereco.findByLogradouro", query = "SELECT c FROM CadEndereco c WHERE c.logradouro = :logradouro")
+    , @NamedQuery(name = "CadEndereco.findByBairro", query = "SELECT c FROM CadEndereco c WHERE c.bairro = :bairro")
+    , @NamedQuery(name = "CadEndereco.findByNumero", query = "SELECT c FROM CadEndereco c WHERE c.numero = :numero")
+    , @NamedQuery(name = "CadEndereco.findByComplemento", query = "SELECT c FROM CadEndereco c WHERE c.complemento = :complemento")
+    , @NamedQuery(name = "CadEndereco.findByCidade", query = "SELECT c FROM CadEndereco c WHERE c.cidade = :cidade")
+    , @NamedQuery(name = "CadEndereco.findByCep", query = "SELECT c FROM CadEndereco c WHERE c.cep = :cep")
+    , @NamedQuery(name = "CadEndereco.findByUf", query = "SELECT c FROM CadEndereco c WHERE c.uf = :uf")
+    , @NamedQuery(name = "CadEndereco.findByDataInsercao", query = "SELECT c FROM CadEndereco c WHERE c.dataInsercao = :dataInsercao")
+    , @NamedQuery(name = "CadEndereco.findByDataAlteracao", query = "SELECT c FROM CadEndereco c WHERE c.dataAlteracao = :dataAlteracao")})
 public class CadEndereco implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -29,35 +29,35 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Leandro Laurindo
  */
 @Entity
-@Table(name = "cad_telefone", catalog = "localeader", schema = "public")
+@Table(name = "cad_fornecedor", catalog = "localeader", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CadTelefone.findAll", query = "SELECT c FROM CadTelefone c")
-    , @NamedQuery(name = "CadTelefone.findByIdTelefone", query = "SELECT c FROM CadTelefone c WHERE c.idTelefone = :idTelefone")
-    , @NamedQuery(name = "CadTelefone.findByDdd", query = "SELECT c FROM CadTelefone c WHERE c.ddd = :ddd")
-    , @NamedQuery(name = "CadTelefone.findByTelefone", query = "SELECT c FROM CadTelefone c WHERE c.telefone = :telefone")
-    , @NamedQuery(name = "CadTelefone.findByWhatsapp", query = "SELECT c FROM CadTelefone c WHERE c.whatsapp = :whatsapp")
-    , @NamedQuery(name = "CadTelefone.findByDataInsercao", query = "SELECT c FROM CadTelefone c WHERE c.dataInsercao = :dataInsercao")
-    , @NamedQuery(name = "CadTelefone.findByDataAlteracao", query = "SELECT c FROM CadTelefone c WHERE c.dataAlteracao = :dataAlteracao")})
-public class CadTelefone implements Serializable {
+    @NamedQuery(name = "CadFornecedor.findAll", query = "SELECT c FROM CadFornecedor c")
+    , @NamedQuery(name = "CadFornecedor.findByIdFornecedor", query = "SELECT c FROM CadFornecedor c WHERE c.idFornecedor = :idFornecedor")
+    , @NamedQuery(name = "CadFornecedor.findBySegmentoFk", query = "SELECT c FROM CadFornecedor c WHERE c.segmentoFk = :segmentoFk")
+    , @NamedQuery(name = "CadFornecedor.findByBanco", query = "SELECT c FROM CadFornecedor c WHERE c.banco = :banco")
+    , @NamedQuery(name = "CadFornecedor.findByAgencia", query = "SELECT c FROM CadFornecedor c WHERE c.agencia = :agencia")
+    , @NamedQuery(name = "CadFornecedor.findByConta", query = "SELECT c FROM CadFornecedor c WHERE c.conta = :conta")
+    , @NamedQuery(name = "CadFornecedor.findByDataInsercao", query = "SELECT c FROM CadFornecedor c WHERE c.dataInsercao = :dataInsercao")
+    , @NamedQuery(name = "CadFornecedor.findByDataAlteracao", query = "SELECT c FROM CadFornecedor c WHERE c.dataAlteracao = :dataAlteracao")})
+public class CadFornecedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_telefone")
-    private Integer idTelefone;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ddd")
-    private int ddd;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "telefone")
-    private String telefone;
-    @Column(name = "whatsapp")
-    private Boolean whatsapp;
+    @Column(name = "id_fornecedor")
+    private Integer idFornecedor;
+    @Column(name = "segmento_fk")
+    private Integer segmentoFk;
+    @Column(name = "banco")
+    private Integer banco;
+    @Size(max = 5)
+    @Column(name = "agencia")
+    private String agencia;
+    @Size(max = 15)
+    @Column(name = "conta")
+    private String conta;
     @Basic(optional = false)
     @NotNull
     @Column(name = "data_insercao")
@@ -75,51 +75,57 @@ public class CadTelefone implements Serializable {
     @ManyToOne(optional = false)
     private Usuario usuarioFk;
 
-    public CadTelefone() {
+    public CadFornecedor() {
     }
 
-    public CadTelefone(Integer idTelefone) {
-        this.idTelefone = idTelefone;
+    public CadFornecedor(Integer idFornecedor) {
+        this.idFornecedor = idFornecedor;
     }
 
-    public CadTelefone(Integer idTelefone, int ddd, String telefone, Date dataInsercao, Date dataAlteracao) {
-        this.idTelefone = idTelefone;
-        this.ddd = ddd;
-        this.telefone = telefone;
+    public CadFornecedor(Integer idFornecedor, Date dataInsercao, Date dataAlteracao) {
+        this.idFornecedor = idFornecedor;
         this.dataInsercao = dataInsercao;
         this.dataAlteracao = dataAlteracao;
     }
 
-    public Integer getIdTelefone() {
-        return idTelefone;
+    public Integer getIdFornecedor() {
+        return idFornecedor;
     }
 
-    public void setIdTelefone(Integer idTelefone) {
-        this.idTelefone = idTelefone;
+    public void setIdFornecedor(Integer idFornecedor) {
+        this.idFornecedor = idFornecedor;
     }
 
-    public int getDdd() {
-        return ddd;
+    public Integer getSegmentoFk() {
+        return segmentoFk;
     }
 
-    public void setDdd(int ddd) {
-        this.ddd = ddd;
+    public void setSegmentoFk(Integer segmentoFk) {
+        this.segmentoFk = segmentoFk;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public Integer getBanco() {
+        return banco;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setBanco(Integer banco) {
+        this.banco = banco;
     }
 
-    public Boolean getWhatsapp() {
-        return whatsapp;
+    public String getAgencia() {
+        return agencia;
     }
 
-    public void setWhatsapp(Boolean whatsapp) {
-        this.whatsapp = whatsapp;
+    public void setAgencia(String agencia) {
+        this.agencia = agencia;
+    }
+
+    public String getConta() {
+        return conta;
+    }
+
+    public void setConta(String conta) {
+        this.conta = conta;
     }
 
     public Date getDataInsercao() {
@@ -157,18 +163,18 @@ public class CadTelefone implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTelefone != null ? idTelefone.hashCode() : 0);
+        hash += (idFornecedor != null ? idFornecedor.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CadTelefone)) {
+        if (!(object instanceof CadFornecedor)) {
             return false;
         }
-        CadTelefone other = (CadTelefone) object;
-        if ((this.idTelefone == null && other.idTelefone != null) || (this.idTelefone != null && !this.idTelefone.equals(other.idTelefone))) {
+        CadFornecedor other = (CadFornecedor) object;
+        if ((this.idFornecedor == null && other.idFornecedor != null) || (this.idFornecedor != null && !this.idFornecedor.equals(other.idFornecedor))) {
             return false;
         }
         return true;
@@ -176,7 +182,7 @@ public class CadTelefone implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.localeader.api.model.CadTelefone[ idTelefone=" + idTelefone + " ]";
+        return "br.com.localeader.api.model.CadFornecedor[ idFornecedor=" + idFornecedor + " ]";
     }
     
 }

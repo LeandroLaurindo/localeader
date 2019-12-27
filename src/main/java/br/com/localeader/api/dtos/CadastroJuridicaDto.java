@@ -21,6 +21,7 @@ public class CadastroJuridicaDto {
 
     Integer idPessoa;
     String tipoPessoa = "JURÍDICA";
+    String login;
     String nome;
     String razaoSocial;
     Date dataNasc;
@@ -177,10 +178,25 @@ public class CadastroJuridicaDto {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+public String getNome() {
+        return nome;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
 
     @Override
     public String toString() {
         return super.toString(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Integer getEmail() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

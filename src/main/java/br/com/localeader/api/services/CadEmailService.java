@@ -16,7 +16,11 @@ import org.springframework.data.domain.PageRequest;
  * @author Leandro Laurindo
  */
 public interface CadEmailService {
-    
+    /**
+     * 
+     * @param email
+     * @return 
+     */
     CadEmail persistir(CadEmail email);
     
     Optional<CadEmail> buscarPoIdEmail(Integer email);

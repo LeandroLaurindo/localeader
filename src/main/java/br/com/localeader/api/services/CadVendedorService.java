@@ -5,7 +5,7 @@
  */
 package br.com.localeader.api.services;
 
-import br.com.localeader.api.model.CadGrupo;
+import br.com.localeader.api.model.CadVendedor;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,12 +13,13 @@ import java.util.Optional;
  *
  * @author Leandro Laurindo
  */
-public interface CadGrupoService {
-    
-    CadGrupo persistir(CadGrupo grupo);
-    
-    Optional<CadGrupo> buscarPorIdGrupo(Integer idGrupo);
-    
-    Optional<CadGrupo> buscarPorDsNome(String dsNome);
-    
+public interface CadVendedorService {
+
+    CadVendedor persitir(CadVendedor cadVendedor);
+
+    CadVendedor remover(CadVendedor cadVendedor);
+
+    Optional<CadVendedor> buscarPorId(Integer idVendedor);
+
+    List<CadVendedor> listarTodos();
 }

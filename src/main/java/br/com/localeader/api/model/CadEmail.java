@@ -32,7 +32,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "cad_email", catalog = "localeader", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CadEmail.findAll", query = "SELECT c FROM CadEmail c")})
+    @NamedQuery(name = "CadEmail.findAll", query = "SELECT c FROM CadEmail c")
+    , @NamedQuery(name = "CadEmail.findByIdEmail", query = "SELECT c FROM CadEmail c WHERE c.idEmail = :idEmail")
+    , @NamedQuery(name = "CadEmail.findByEmail", query = "SELECT c FROM CadEmail c WHERE c.email = :email")
+    , @NamedQuery(name = "CadEmail.findBySite", query = "SELECT c FROM CadEmail c WHERE c.site = :site")
+    , @NamedQuery(name = "CadEmail.findByObservacao", query = "SELECT c FROM CadEmail c WHERE c.observacao = :observacao")
+    , @NamedQuery(name = "CadEmail.findByDataInsercao", query = "SELECT c FROM CadEmail c WHERE c.dataInsercao = :dataInsercao")
+    , @NamedQuery(name = "CadEmail.findByDataAlteracao", query = "SELECT c FROM CadEmail c WHERE c.dataAlteracao = :dataAlteracao")})
 public class CadEmail implements Serializable {
 
     private static final long serialVersionUID = 1L;

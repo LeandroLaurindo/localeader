@@ -29,7 +29,17 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "cad_cliente", catalog = "localeader", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CadCliente.findAll", query = "SELECT c FROM CadCliente c")})
+    @NamedQuery(name = "CadCliente.findAll", query = "SELECT c FROM CadCliente c")
+    , @NamedQuery(name = "CadCliente.findByIdCliente", query = "SELECT c FROM CadCliente c WHERE c.idCliente = :idCliente")
+    , @NamedQuery(name = "CadCliente.findByVendedorFk", query = "SELECT c FROM CadCliente c WHERE c.vendedorFk = :vendedorFk")
+    , @NamedQuery(name = "CadCliente.findByPlanoPagto", query = "SELECT c FROM CadCliente c WHERE c.planoPagto = :planoPagto")
+    , @NamedQuery(name = "CadCliente.findByTabelaPrecoFk", query = "SELECT c FROM CadCliente c WHERE c.tabelaPrecoFk = :tabelaPrecoFk")
+    , @NamedQuery(name = "CadCliente.findBySegmentoFk", query = "SELECT c FROM CadCliente c WHERE c.segmentoFk = :segmentoFk")
+    , @NamedQuery(name = "CadCliente.findByClassificacaoFk", query = "SELECT c FROM CadCliente c WHERE c.classificacaoFk = :classificacaoFk")
+    , @NamedQuery(name = "CadCliente.findByOrigemCliente", query = "SELECT c FROM CadCliente c WHERE c.origemCliente = :origemCliente")
+    , @NamedQuery(name = "CadCliente.findByLimiteCredito", query = "SELECT c FROM CadCliente c WHERE c.limiteCredito = :limiteCredito")
+    , @NamedQuery(name = "CadCliente.findByObservacao", query = "SELECT c FROM CadCliente c WHERE c.observacao = :observacao")
+    , @NamedQuery(name = "CadCliente.findByRepresentanteLegalFk", query = "SELECT c FROM CadCliente c WHERE c.representanteLegalFk = :representanteLegalFk")})
 public class CadCliente implements Serializable {
 
     private static final long serialVersionUID = 1L;

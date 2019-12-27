@@ -5,10 +5,11 @@
  */
 package br.com.localeader.api.repositories;
 
-import br.com.localeader.api.model.Usuario;
+import br.com.localeader.api.model.CadVendedor;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 
 /**
  *
@@ -16,11 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Repository
 @Transactional(readOnly = true)
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
-  
-    Usuario findByIdUsuario(Integer idUsuario);
+public interface CadVendedorRepository extends JpaRepository<CadVendedor, Integer> {
+    CadVendedor findByIdVendedor(Integer idVendedor);
     
-    Usuario findByLogin(String login);
-    
-    Usuario findByLoginOrSenha(String login, String senha);
 }

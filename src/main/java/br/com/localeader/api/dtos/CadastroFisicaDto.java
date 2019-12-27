@@ -21,6 +21,7 @@ public class CadastroFisicaDto {
     Integer idPessoa;
     String tipoPessoa = "FÍSICA";
     String nome;
+    String login;
     String razaoSocial;
     Date dataNasc;
     String estato_civel;
@@ -180,6 +181,16 @@ public class CadastroFisicaDto {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    
+    
 
     @Override
     public String toString() {

@@ -21,7 +21,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -29,35 +28,21 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Leandro Laurindo
  */
 @Entity
-@Table(name = "cad_telefone", catalog = "localeader", schema = "public")
+@Table(name = "cad_vendedor", catalog = "localeader", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CadTelefone.findAll", query = "SELECT c FROM CadTelefone c")
-    , @NamedQuery(name = "CadTelefone.findByIdTelefone", query = "SELECT c FROM CadTelefone c WHERE c.idTelefone = :idTelefone")
-    , @NamedQuery(name = "CadTelefone.findByDdd", query = "SELECT c FROM CadTelefone c WHERE c.ddd = :ddd")
-    , @NamedQuery(name = "CadTelefone.findByTelefone", query = "SELECT c FROM CadTelefone c WHERE c.telefone = :telefone")
-    , @NamedQuery(name = "CadTelefone.findByWhatsapp", query = "SELECT c FROM CadTelefone c WHERE c.whatsapp = :whatsapp")
-    , @NamedQuery(name = "CadTelefone.findByDataInsercao", query = "SELECT c FROM CadTelefone c WHERE c.dataInsercao = :dataInsercao")
-    , @NamedQuery(name = "CadTelefone.findByDataAlteracao", query = "SELECT c FROM CadTelefone c WHERE c.dataAlteracao = :dataAlteracao")})
-public class CadTelefone implements Serializable {
+    @NamedQuery(name = "CadVendedor.findAll", query = "SELECT c FROM CadVendedor c")
+    , @NamedQuery(name = "CadVendedor.findByIdVendedor", query = "SELECT c FROM CadVendedor c WHERE c.idVendedor = :idVendedor")
+    , @NamedQuery(name = "CadVendedor.findByDataInsercao", query = "SELECT c FROM CadVendedor c WHERE c.dataInsercao = :dataInsercao")
+    , @NamedQuery(name = "CadVendedor.findByDataAlteracao", query = "SELECT c FROM CadVendedor c WHERE c.dataAlteracao = :dataAlteracao")})
+public class CadVendedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id_telefone")
-    private Integer idTelefone;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "ddd")
-    private int ddd;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
-    @Column(name = "telefone")
-    private String telefone;
-    @Column(name = "whatsapp")
-    private Boolean whatsapp;
+    @Column(name = "id_vendedor")
+    private Integer idVendedor;
     @Basic(optional = false)
     @NotNull
     @Column(name = "data_insercao")
@@ -75,51 +60,25 @@ public class CadTelefone implements Serializable {
     @ManyToOne(optional = false)
     private Usuario usuarioFk;
 
-    public CadTelefone() {
+    public CadVendedor() {
     }
 
-    public CadTelefone(Integer idTelefone) {
-        this.idTelefone = idTelefone;
+    public CadVendedor(Integer idVendedor) {
+        this.idVendedor = idVendedor;
     }
 
-    public CadTelefone(Integer idTelefone, int ddd, String telefone, Date dataInsercao, Date dataAlteracao) {
-        this.idTelefone = idTelefone;
-        this.ddd = ddd;
-        this.telefone = telefone;
+    public CadVendedor(Integer idVendedor, Date dataInsercao, Date dataAlteracao) {
+        this.idVendedor = idVendedor;
         this.dataInsercao = dataInsercao;
         this.dataAlteracao = dataAlteracao;
     }
 
-    public Integer getIdTelefone() {
-        return idTelefone;
+    public Integer getIdVendedor() {
+        return idVendedor;
     }
 
-    public void setIdTelefone(Integer idTelefone) {
-        this.idTelefone = idTelefone;
-    }
-
-    public int getDdd() {
-        return ddd;
-    }
-
-    public void setDdd(int ddd) {
-        this.ddd = ddd;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
-    }
-
-    public Boolean getWhatsapp() {
-        return whatsapp;
-    }
-
-    public void setWhatsapp(Boolean whatsapp) {
-        this.whatsapp = whatsapp;
+    public void setIdVendedor(Integer idVendedor) {
+        this.idVendedor = idVendedor;
     }
 
     public Date getDataInsercao() {
@@ -157,18 +116,18 @@ public class CadTelefone implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idTelefone != null ? idTelefone.hashCode() : 0);
+        hash += (idVendedor != null ? idVendedor.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CadTelefone)) {
+        if (!(object instanceof CadVendedor)) {
             return false;
         }
-        CadTelefone other = (CadTelefone) object;
-        if ((this.idTelefone == null && other.idTelefone != null) || (this.idTelefone != null && !this.idTelefone.equals(other.idTelefone))) {
+        CadVendedor other = (CadVendedor) object;
+        if ((this.idVendedor == null && other.idVendedor != null) || (this.idVendedor != null && !this.idVendedor.equals(other.idVendedor))) {
             return false;
         }
         return true;
@@ -176,7 +135,7 @@ public class CadTelefone implements Serializable {
 
     @Override
     public String toString() {
-        return "br.com.localeader.api.model.CadTelefone[ idTelefone=" + idTelefone + " ]";
+        return "br.com.localeader.api.model.CadVendedor[ idVendedor=" + idVendedor + " ]";
     }
     
 }

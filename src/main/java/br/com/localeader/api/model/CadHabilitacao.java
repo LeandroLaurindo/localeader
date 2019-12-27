@@ -32,7 +32,15 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "cad_habilitacao", catalog = "localeader", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CadHabilitacao.findAll", query = "SELECT c FROM CadHabilitacao c")})
+    @NamedQuery(name = "CadHabilitacao.findAll", query = "SELECT c FROM CadHabilitacao c")
+    , @NamedQuery(name = "CadHabilitacao.findByIdHabilitacao", query = "SELECT c FROM CadHabilitacao c WHERE c.idHabilitacao = :idHabilitacao")
+    , @NamedQuery(name = "CadHabilitacao.findByNumRegistro", query = "SELECT c FROM CadHabilitacao c WHERE c.numRegistro = :numRegistro")
+    , @NamedQuery(name = "CadHabilitacao.findByValidade", query = "SELECT c FROM CadHabilitacao c WHERE c.validade = :validade")
+    , @NamedQuery(name = "CadHabilitacao.findByCategoria", query = "SELECT c FROM CadHabilitacao c WHERE c.categoria = :categoria")
+    , @NamedQuery(name = "CadHabilitacao.findByOrgao", query = "SELECT c FROM CadHabilitacao c WHERE c.orgao = :orgao")
+    , @NamedQuery(name = "CadHabilitacao.findByEmissao", query = "SELECT c FROM CadHabilitacao c WHERE c.emissao = :emissao")
+    , @NamedQuery(name = "CadHabilitacao.findByCnh", query = "SELECT c FROM CadHabilitacao c WHERE c.cnh = :cnh")
+    , @NamedQuery(name = "CadHabilitacao.findByNumSeguranca", query = "SELECT c FROM CadHabilitacao c WHERE c.numSeguranca = :numSeguranca")})
 public class CadHabilitacao implements Serializable {
 
     private static final long serialVersionUID = 1L;

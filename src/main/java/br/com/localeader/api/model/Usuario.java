@@ -6,7 +6,7 @@
 package br.com.localeader.api.model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +31,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "usuario", catalog = "localeader", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+    , @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario")
+    , @NamedQuery(name = "Usuario.findByLogin", query = "SELECT u FROM Usuario u WHERE u.login = :login")
+    , @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")
+    , @NamedQuery(name = "Usuario.findByAtivo", query = "SELECT u FROM Usuario u WHERE u.ativo = :ativo")})
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,15 +58,23 @@ public class Usuario implements Serializable {
     @Column(name = "ativo")
     private String ativo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioFk")
-    private Collection<CadEmail> cadEmailCollection;
+    private List<CadFuncionarios> cadFuncionariosList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioFk")
-    private Collection<UsuarioGrupo> usuarioGrupoCollection;
+    private List<CadEmail> cadEmailList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioFk")
-    private Collection<CadTelefone> cadTelefoneCollection;
+    private List<CadFornecedor> cadFornecedorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioFk")
-    private Collection<CadPessoa> cadPessoaCollection;
+    private List<CadVendedor> cadVendedorList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioFk")
-    private Collection<CadEndereco> cadEnderecoCollection;
+    private List<UsuarioGrupo> usuarioGrupoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioFk")
+    private List<CadTelefone> cadTelefoneList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioFk")
+    private List<CadOcorrencias> cadOcorrenciasList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioFk")
+    private List<CadPessoa> cadPessoaList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioFk")
+    private List<CadEndereco> cadEnderecoList;
 
     public Usuario() {
     }
@@ -110,48 +122,84 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<CadEmail> getCadEmailCollection() {
-        return cadEmailCollection;
+    public List<CadFuncionarios> getCadFuncionariosList() {
+        return cadFuncionariosList;
     }
 
-    public void setCadEmailCollection(Collection<CadEmail> cadEmailCollection) {
-        this.cadEmailCollection = cadEmailCollection;
-    }
-
-    @XmlTransient
-    public Collection<UsuarioGrupo> getUsuarioGrupoCollection() {
-        return usuarioGrupoCollection;
-    }
-
-    public void setUsuarioGrupoCollection(Collection<UsuarioGrupo> usuarioGrupoCollection) {
-        this.usuarioGrupoCollection = usuarioGrupoCollection;
+    public void setCadFuncionariosList(List<CadFuncionarios> cadFuncionariosList) {
+        this.cadFuncionariosList = cadFuncionariosList;
     }
 
     @XmlTransient
-    public Collection<CadTelefone> getCadTelefoneCollection() {
-        return cadTelefoneCollection;
+    public List<CadEmail> getCadEmailList() {
+        return cadEmailList;
     }
 
-    public void setCadTelefoneCollection(Collection<CadTelefone> cadTelefoneCollection) {
-        this.cadTelefoneCollection = cadTelefoneCollection;
-    }
-
-    @XmlTransient
-    public Collection<CadPessoa> getCadPessoaCollection() {
-        return cadPessoaCollection;
-    }
-
-    public void setCadPessoaCollection(Collection<CadPessoa> cadPessoaCollection) {
-        this.cadPessoaCollection = cadPessoaCollection;
+    public void setCadEmailList(List<CadEmail> cadEmailList) {
+        this.cadEmailList = cadEmailList;
     }
 
     @XmlTransient
-    public Collection<CadEndereco> getCadEnderecoCollection() {
-        return cadEnderecoCollection;
+    public List<CadFornecedor> getCadFornecedorList() {
+        return cadFornecedorList;
     }
 
-    public void setCadEnderecoCollection(Collection<CadEndereco> cadEnderecoCollection) {
-        this.cadEnderecoCollection = cadEnderecoCollection;
+    public void setCadFornecedorList(List<CadFornecedor> cadFornecedorList) {
+        this.cadFornecedorList = cadFornecedorList;
+    }
+
+    @XmlTransient
+    public List<CadVendedor> getCadVendedorList() {
+        return cadVendedorList;
+    }
+
+    public void setCadVendedorList(List<CadVendedor> cadVendedorList) {
+        this.cadVendedorList = cadVendedorList;
+    }
+
+    @XmlTransient
+    public List<UsuarioGrupo> getUsuarioGrupoList() {
+        return usuarioGrupoList;
+    }
+
+    public void setUsuarioGrupoList(List<UsuarioGrupo> usuarioGrupoList) {
+        this.usuarioGrupoList = usuarioGrupoList;
+    }
+
+    @XmlTransient
+    public List<CadTelefone> getCadTelefoneList() {
+        return cadTelefoneList;
+    }
+
+    public void setCadTelefoneList(List<CadTelefone> cadTelefoneList) {
+        this.cadTelefoneList = cadTelefoneList;
+    }
+
+    @XmlTransient
+    public List<CadOcorrencias> getCadOcorrenciasList() {
+        return cadOcorrenciasList;
+    }
+
+    public void setCadOcorrenciasList(List<CadOcorrencias> cadOcorrenciasList) {
+        this.cadOcorrenciasList = cadOcorrenciasList;
+    }
+
+    @XmlTransient
+    public List<CadPessoa> getCadPessoaList() {
+        return cadPessoaList;
+    }
+
+    public void setCadPessoaList(List<CadPessoa> cadPessoaList) {
+        this.cadPessoaList = cadPessoaList;
+    }
+
+    @XmlTransient
+    public List<CadEndereco> getCadEnderecoList() {
+        return cadEnderecoList;
+    }
+
+    public void setCadEnderecoList(List<CadEndereco> cadEnderecoList) {
+        this.cadEnderecoList = cadEnderecoList;
     }
 
     @Override

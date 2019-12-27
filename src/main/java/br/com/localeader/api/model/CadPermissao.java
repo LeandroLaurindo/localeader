@@ -6,7 +6,7 @@
 package br.com.localeader.api.model;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -31,7 +31,10 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "cad_permissao", catalog = "localeader", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CadPermissao.findAll", query = "SELECT c FROM CadPermissao c")})
+    @NamedQuery(name = "CadPermissao.findAll", query = "SELECT c FROM CadPermissao c")
+    , @NamedQuery(name = "CadPermissao.findByIdPermissao", query = "SELECT c FROM CadPermissao c WHERE c.idPermissao = :idPermissao")
+    , @NamedQuery(name = "CadPermissao.findByDsPermissao", query = "SELECT c FROM CadPermissao c WHERE c.dsPermissao = :dsPermissao")
+    , @NamedQuery(name = "CadPermissao.findByDsDescricao", query = "SELECT c FROM CadPermissao c WHERE c.dsDescricao = :dsDescricao")})
 public class CadPermissao implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,7 +54,7 @@ public class CadPermissao implements Serializable {
     @Column(name = "ds_descricao")
     private String dsDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fkPermissao")
-    private Collection<PermissaoGrupo> permissaoGrupoCollection;
+    private List<PermissaoGrupo> permissaoGrupoList;
 
     public CadPermissao() {
     }
@@ -91,12 +94,12 @@ public class CadPermissao implements Serializable {
     }
 
     @XmlTransient
-    public Collection<PermissaoGrupo> getPermissaoGrupoCollection() {
-        return permissaoGrupoCollection;
+    public List<PermissaoGrupo> getPermissaoGrupoList() {
+        return permissaoGrupoList;
     }
 
-    public void setPermissaoGrupoCollection(Collection<PermissaoGrupo> permissaoGrupoCollection) {
-        this.permissaoGrupoCollection = permissaoGrupoCollection;
+    public void setPermissaoGrupoList(List<PermissaoGrupo> permissaoGrupoList) {
+        this.permissaoGrupoList = permissaoGrupoList;
     }
 
     @Override

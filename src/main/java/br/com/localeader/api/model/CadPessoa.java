@@ -6,8 +6,8 @@
 package br.com.localeader.api.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -36,7 +36,22 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "cad_pessoa", catalog = "localeader", schema = "public")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "CadPessoa.findAll", query = "SELECT c FROM CadPessoa c")})
+    @NamedQuery(name = "CadPessoa.findAll", query = "SELECT c FROM CadPessoa c")
+    , @NamedQuery(name = "CadPessoa.findByIdPessoa", query = "SELECT c FROM CadPessoa c WHERE c.idPessoa = :idPessoa")
+    , @NamedQuery(name = "CadPessoa.findByTipoPessoa", query = "SELECT c FROM CadPessoa c WHERE c.tipoPessoa = :tipoPessoa")
+    , @NamedQuery(name = "CadPessoa.findByNome", query = "SELECT c FROM CadPessoa c WHERE c.nome = :nome")
+    , @NamedQuery(name = "CadPessoa.findByRazaoSocial", query = "SELECT c FROM CadPessoa c WHERE c.razaoSocial = :razaoSocial")
+    , @NamedQuery(name = "CadPessoa.findByDataNascimento", query = "SELECT c FROM CadPessoa c WHERE c.dataNascimento = :dataNascimento")
+    , @NamedQuery(name = "CadPessoa.findBySexo", query = "SELECT c FROM CadPessoa c WHERE c.sexo = :sexo")
+    , @NamedQuery(name = "CadPessoa.findByEstadoCivil", query = "SELECT c FROM CadPessoa c WHERE c.estadoCivil = :estadoCivil")
+    , @NamedQuery(name = "CadPessoa.findByProfissao", query = "SELECT c FROM CadPessoa c WHERE c.profissao = :profissao")
+    , @NamedQuery(name = "CadPessoa.findByConjuge", query = "SELECT c FROM CadPessoa c WHERE c.conjuge = :conjuge")
+    , @NamedQuery(name = "CadPessoa.findByEstrangeiro", query = "SELECT c FROM CadPessoa c WHERE c.estrangeiro = :estrangeiro")
+    , @NamedQuery(name = "CadPessoa.findByPais", query = "SELECT c FROM CadPessoa c WHERE c.pais = :pais")
+    , @NamedQuery(name = "CadPessoa.findByNacionalidade", query = "SELECT c FROM CadPessoa c WHERE c.nacionalidade = :nacionalidade")
+    , @NamedQuery(name = "CadPessoa.findBySituacao", query = "SELECT c FROM CadPessoa c WHERE c.situacao = :situacao")
+    , @NamedQuery(name = "CadPessoa.findByDataInsercao", query = "SELECT c FROM CadPessoa c WHERE c.dataInsercao = :dataInsercao")
+    , @NamedQuery(name = "CadPessoa.findByDataAlteracao", query = "SELECT c FROM CadPessoa c WHERE c.dataAlteracao = :dataAlteracao")})
 public class CadPessoa implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,7 +77,7 @@ public class CadPessoa implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
     @Column(name = "sexo")
-    private Character sexo;
+    private String sexo;
     @Size(max = 50)
     @Column(name = "estado_civil")
     private String estadoCivil;
@@ -96,7 +111,7 @@ public class CadPessoa implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataAlteracao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaFk")
-    private Collection<CadDocumentos> cadDocumentosCollection;
+    private List<CadDocumentos> cadDocumentosList;
     @JoinColumn(name = "usuario_fk", referencedColumnName = "id_usuario")
     @ManyToOne(optional = false)
     private Usuario usuarioFk;
@@ -157,11 +172,11 @@ public class CadPessoa implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public Character getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(Character sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -238,12 +253,12 @@ public class CadPessoa implements Serializable {
     }
 
     @XmlTransient
-    public Collection<CadDocumentos> getCadDocumentosCollection() {
-        return cadDocumentosCollection;
+    public List<CadDocumentos> getCadDocumentosList() {
+        return cadDocumentosList;
     }
 
-    public void setCadDocumentosCollection(Collection<CadDocumentos> cadDocumentosCollection) {
-        this.cadDocumentosCollection = cadDocumentosCollection;
+    public void setCadDocumentosList(List<CadDocumentos> cadDocumentosList) {
+        this.cadDocumentosList = cadDocumentosList;
     }
 
     public Usuario getUsuarioFk() {

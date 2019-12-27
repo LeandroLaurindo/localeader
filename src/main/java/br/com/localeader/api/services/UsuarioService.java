@@ -15,7 +15,8 @@ import java.util.Optional;
 
 public interface UsuarioService {
     
-    Optional<Usuario> buscaUsuarioPorLogin(String login);
-    
     Usuario persistir(Usuario usuario);
+    
+    Optional<Usuario> buscaUsuarioPorLogin(String login);
+        
 }
